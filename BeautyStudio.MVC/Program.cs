@@ -1,7 +1,14 @@
+using BeautyStudio.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
+using BeautyStudio.Infrastructure.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddInfrastructure(builder.Configuration);
+
 
 var app = builder.Build();
 

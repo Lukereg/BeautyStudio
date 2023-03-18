@@ -8,7 +8,7 @@ namespace BeautyStudio.Domain.Entities
 {
     public class BeautyStudio
     {
-        public required int Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; } = default!;
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public string EncodedName { get; private set; } = default!;
