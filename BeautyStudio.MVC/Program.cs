@@ -1,6 +1,7 @@
 using BeautyStudio.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using BeautyStudio.Infrastructure.Extensions;
+using BeautyStudio.Infrastructure.Seeders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,10 @@ builder.Services.AddInfrastructure(builder.Configuration);
 
 
 var app = builder.Build();
+
+var scope = app.Services.CreateScope();
+var seeder = scope.ServiceProvider.GetRequiredService<RoleSeeder>();
+await seeder.Seed();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
