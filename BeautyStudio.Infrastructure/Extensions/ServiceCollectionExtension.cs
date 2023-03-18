@@ -1,4 +1,6 @@
-﻿using BeautyStudio.Infrastructure.Persistence;
+﻿using BeautyStudio.Domain.Interfaces;
+using BeautyStudio.Infrastructure.Persistence;
+using BeautyStudio.Infrastructure.Repositories;
 using BeautyStudio.Infrastructure.Seeders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -20,6 +22,8 @@ namespace BeautyStudio.Infrastructure.Extensions
                 configuration.GetConnectionString("BeautyStudio")));
 
             services.AddScoped<RoleSeeder>();
+
+            services.AddScoped<IBeautyStudioRepository, BeautyStudioRepository>();
         }
     }
 }
