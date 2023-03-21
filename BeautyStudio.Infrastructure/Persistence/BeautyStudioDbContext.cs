@@ -1,4 +1,5 @@
 ﻿using BeautyStudio.Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BeautyStudio.Infrastructure.Persistence
 {
-    public class BeautyStudioDbContext : DbContext
+    public class BeautyStudioDbContext : IdentityDbContext
     {
         public DbSet<Domain.Entities.BeautyStudio> BeautyStudios { get; set; }
         public DbSet<Role> Roles { get; set; }
@@ -23,6 +24,8 @@ namespace BeautyStudio.Infrastructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Domain.Entities.BeautyStudio>(entity =>
             {
                 entity.Property(s => s.Name)

@@ -2,6 +2,7 @@
 using BeautyStudio.Infrastructure.Persistence;
 using BeautyStudio.Infrastructure.Repositories;
 using BeautyStudio.Infrastructure.Seeders;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +21,9 @@ namespace BeautyStudio.Infrastructure.Extensions
         {
             services.AddDbContext<BeautyStudioDbContext>(options => options.UseSqlServer(
                 configuration.GetConnectionString("BeautyStudio")));
+
+            services.AddDefaultIdentity<IdentityUser>()
+                .AddEntityFrameworkStores<BeautyStudioDbContext>();
 
             services.AddScoped<RoleSeeder>();
 

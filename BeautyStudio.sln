@@ -5,11 +5,11 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeautyStudio.MVC", "BeautyStudio.MVC\BeautyStudio.MVC.csproj", "{B01E6447-BB60-48EC-8F45-06A15D7798EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeautyStudio.Domain", "BeautyStudio.Domain\BeautyStudio.Domain.csproj", "{4AC16D96-8827-40B3-9133-AF03DBE98D87}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeautyStudio.Domain", "BeautyStudio.Domain\BeautyStudio.Domain.csproj", "{4AC16D96-8827-40B3-9133-AF03DBE98D87}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeautyStudio.Application", "BeautyStudio.Application\BeautyStudio.Application.csproj", "{A32931A5-A5C9-4372-B4AD-D4A0F4AFFDB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeautyStudio.Application", "BeautyStudio.Application\BeautyStudio.Application.csproj", "{A32931A5-A5C9-4372-B4AD-D4A0F4AFFDB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeautyStudio.Infrastructure", "BeautyStudio.Infrastructure\BeautyStudio.Infrastructure.csproj", "{76AFC11F-8C8F-4780-8FE5-1D8A6859202C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BeautyStudio.Infrastructure", "BeautyStudio.Infrastructure\BeautyStudio.Infrastructure.csproj", "{76AFC11F-8C8F-4780-8FE5-1D8A6859202C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
