@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BeautyStudio.Application.ApplicationUser;
 using BeautyStudio.Application.Models.BeautyStudio;
 using BeautyStudio.Domain.Interfaces;
 using System;
@@ -13,16 +14,19 @@ namespace BeautyStudio.Application.Services
     {
         private readonly IBeautyStudioRepository _beautyStudioRepository;
         private readonly IMapper _mapper;
+        private readonly IUserContext _userContext;
 
-        public BeautyStudioService(IBeautyStudioRepository beautyStudioRepository, IMapper mapper)
+        public BeautyStudioService(IBeautyStudioRepository beautyStudioRepository, IMapper mapper, IUserContext userContext)
         {
             _beautyStudioRepository = beautyStudioRepository;
             _mapper = mapper;
+            _userContext = userContext; 
         }
 
         public async Task Create(AddBeautyStudioDto beautyStudioDto)
         {
             var beautyStudio = _mapper.Map<Domain.Entities.BeautyStudio>(beautyStudioDto);
+            beautyStudio.OwnerId = _userContext.GetCurrentUser().Id;
 
             beautyStudio.EncodeName();
 

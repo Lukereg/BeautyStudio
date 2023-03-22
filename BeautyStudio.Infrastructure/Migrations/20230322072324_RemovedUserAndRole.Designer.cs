@@ -4,6 +4,7 @@ using BeautyStudio.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeautyStudio.Infrastructure.Migrations
 {
     [DbContext(typeof(BeautyStudioDbContext))]
-    partial class BeautyStudioDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230322072324_RemovedUserAndRole")]
+    partial class RemovedUserAndRole
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,15 +46,9 @@ namespace BeautyStudio.Infrastructure.Migrations
                         .HasMaxLength(80)
                         .HasColumnType("nvarchar(80)");
 
-                    b.Property<string>("OwnerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("OwnerId");
-
-                    b.ToTable("BeautyStudios", (string)null);
+                    b.ToTable("BeautyStudios");
                 });
 
             modelBuilder.Entity("BeautyStudio.Domain.Entities.Client", b =>
@@ -87,7 +84,7 @@ namespace BeautyStudio.Infrastructure.Migrations
 
                     b.HasIndex("BeautyStudioId");
 
-                    b.ToTable("Clients", (string)null);
+                    b.ToTable("Clients");
                 });
 
             modelBuilder.Entity("BeautyStudio.Domain.Entities.Visit", b =>
@@ -97,10 +94,6 @@ namespace BeautyStudio.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("BeauticianId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("BeautyStudioId")
                         .HasColumnType("int");
@@ -131,13 +124,11 @@ namespace BeautyStudio.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BeauticianId");
-
                     b.HasIndex("BeautyStudioId");
 
                     b.HasIndex("ClientId");
 
-                    b.ToTable("Visits", (string)null);
+                    b.ToTable("Visits");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -200,9 +191,6 @@ namespace BeautyStudio.Infrastructure.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<int?>("BeautyStudioId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -248,8 +236,6 @@ namespace BeautyStudio.Infrastructure.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("BeautyStudioId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");
@@ -347,17 +333,6 @@ namespace BeautyStudio.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("BeautyStudio.Domain.Entities.BeautyStudio", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Owner")
-                        .WithMany()
-                        .HasForeignKey("OwnerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Owner");
-                });
-
             modelBuilder.Entity("BeautyStudio.Domain.Entities.Client", b =>
                 {
                     b.HasOne("BeautyStudio.Domain.Entities.BeautyStudio", "BeautyStudio")
@@ -371,12 +346,6 @@ namespace BeautyStudio.Infrastructure.Migrations
 
             modelBuilder.Entity("BeautyStudio.Domain.Entities.Visit", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Beautician")
-                        .WithMany()
-                        .HasForeignKey("BeauticianId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("BeautyStudio.Domain.Entities.BeautyStudio", "BeautyStudio")
                         .WithMany("Visits")
                         .HasForeignKey("BeautyStudioId")
@@ -388,8 +357,6 @@ namespace BeautyStudio.Infrastructure.Migrations
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-
-                    b.Navigation("Beautician");
 
                     b.Navigation("BeautyStudio");
 
@@ -403,13 +370,6 @@ namespace BeautyStudio.Infrastructure.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
-                {
-                    b.HasOne("BeautyStudio.Domain.Entities.BeautyStudio", null)
-                        .WithMany("Employees")
-                        .HasForeignKey("BeautyStudioId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -457,8 +417,6 @@ namespace BeautyStudio.Infrastructure.Migrations
             modelBuilder.Entity("BeautyStudio.Domain.Entities.BeautyStudio", b =>
                 {
                     b.Navigation("Clients");
-
-                    b.Navigation("Employees");
 
                     b.Navigation("Visits");
                 });

@@ -1,4 +1,5 @@
-﻿using BeautyStudio.Application.MapProfiles;
+﻿using BeautyStudio.Application.ApplicationUser;
+using BeautyStudio.Application.MapProfiles;
 using BeautyStudio.Application.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -14,6 +15,7 @@ namespace BeautyStudio.Application.Extensions
         public static void AddApplication(this IServiceCollection services)
         {
             services.AddScoped<IBeautyStudioService, BeautyStudioService>();
+            services.AddScoped<IUserContext, UserContext>();
 
             services.AddAutoMapper(typeof(BeautyStudioMappingProfile));
         }

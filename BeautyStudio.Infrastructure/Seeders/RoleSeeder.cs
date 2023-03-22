@@ -1,5 +1,7 @@
 ﻿using BeautyStudio.Domain.Entities;
 using BeautyStudio.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,7 +14,7 @@ namespace BeautyStudio.Infrastructure.Seeders
     public class RoleSeeder
     {
         private readonly BeautyStudioDbContext _dbContext;
-    
+
         public RoleSeeder(BeautyStudioDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -22,28 +24,31 @@ namespace BeautyStudio.Infrastructure.Seeders
         {
             if (await _dbContext.Database.CanConnectAsync())
             {
-                if (!_dbContext.Roles.Any())
+                var roleManager = new RoleStore<IdentityRole>(_dbContext);
+                var existingRoles = await roleManager.Roles.ToListAsync();
+
+                if (!existingRoles.Any())
                 {
                     var roles = GetRoles();
-                    await _dbContext.Roles.AddRangeAsync(roles);
-                    await _dbContext.SaveChangesAsync();
+                    foreach (var role in roles)
+                        await roleManager.CreateAsync(role); 
                 }
             }
         }
 
-        private IEnumerable<Role> GetRoles()
+        private List<IdentityRole> GetRoles()
         {
-            var roles = new List<Role>()
+            var roles = new List<IdentityRole>()
             {
-                new Role()
+                new IdentityRole()
                 {
                     Name = "Employee"
                 },
-                new Role()
+                new IdentityRole()
                 {
                     Name = "Owner"
                 },
-                new Role()
+                new IdentityRole()
                 {
                     Name = "Admin"
                 }

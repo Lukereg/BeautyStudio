@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,7 +22,7 @@ namespace BeautyStudio.Domain.Entities
         public int BeautyStudioId { get; set; }
         public Client Client { get; set; } = default!;
         public int ClientId { get; set; }
-        public User Beautician { get; set; } = default!;
-        public int BeauticianId { get; set; }
+        public IdentityUser Beautician { get; set; } = default!;
+        public string BeauticianId { get; set; } = default!;
     }
 }

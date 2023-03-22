@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,10 +15,11 @@ namespace BeautyStudio.Domain.Entities
         public string EncodedName { get; private set; } = default!;
 
         public List<Visit> Visits { get; set; } = new();
-        public List<User> Employees { get; set; } = new();
         public List<Client> Clients { get; set; } = new();
-        public User Owner { get; set; } = default!;
-        public int OwnerId { get; set; }
+        public List<IdentityUser> Employees { get; set; } = new();
+
+        public IdentityUser Owner { get; set; } = default!;
+        public string OwnerId { get; set; } = default!;
 
         public void EncodeName() => EncodedName = Name.ToLower().Replace(" ", "-");
         

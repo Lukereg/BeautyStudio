@@ -4,6 +4,7 @@ using BeautyStudio.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeautyStudio.Infrastructure.Migrations
 {
     [DbContext(typeof(BeautyStudioDbContext))]
-    partial class BeautyStudioDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230322073534_BeautyStudioAndVisitEdited")]
+    partial class BeautyStudioAndVisitEdited
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,7 +54,7 @@ namespace BeautyStudio.Infrastructure.Migrations
 
                     b.HasIndex("OwnerId");
 
-                    b.ToTable("BeautyStudios", (string)null);
+                    b.ToTable("BeautyStudios");
                 });
 
             modelBuilder.Entity("BeautyStudio.Domain.Entities.Client", b =>
@@ -87,7 +90,7 @@ namespace BeautyStudio.Infrastructure.Migrations
 
                     b.HasIndex("BeautyStudioId");
 
-                    b.ToTable("Clients", (string)null);
+                    b.ToTable("Clients");
                 });
 
             modelBuilder.Entity("BeautyStudio.Domain.Entities.Visit", b =>
@@ -137,7 +140,7 @@ namespace BeautyStudio.Infrastructure.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.ToTable("Visits", (string)null);
+                    b.ToTable("Visits");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
