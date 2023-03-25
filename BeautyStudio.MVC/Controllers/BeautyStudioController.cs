@@ -1,21 +1,23 @@
-﻿using BeautyStudio.Application.Models.BeautyStudio;
-using BeautyStudio.Application.Services;
+﻿using BeautyStudio.Application.BeautyStudio;
+using BeautyStudio.Application.BeautyStudio.Commands.CreateBeautyStudio;
+using BeautyStudio.Application.BeautyStudio.Queries.GetAllBeautyStudios;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BeautyStudio.MVC.Controllers
 {
     public class BeautyStudioController : Controller
     {
-        private readonly IBeautyStudioService _beautyStudioService;
+        private readonly IMediator _mediator;
 
-        public BeautyStudioController(IBeautyStudioService beautyStudioService) 
+        public BeautyStudioController(IMediator mediator) 
         {
-            _beautyStudioService = beautyStudioService;
+            _mediator = mediator;
         }
 
         public async Task<IActionResult> Index()
         {
-            var beautyStudios = await _beautyStudioService.GetAll();
+            var beautyStudios = await _mediator.Send(new GetAllBeautyStudiosQuery());
             return View(beautyStudios);
         }
 
@@ -25,12 +27,12 @@ namespace BeautyStudio.MVC.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(AddBeautyStudioDto beautyStudio)
+        public async Task<IActionResult> Create(CreateBeautyStudioCommand command)
         {
             if (!ModelState.IsValid)
-                return View(beautyStudio);
+                return View(command);
 
-            await _beautyStudioService.Create(beautyStudio);
+            await _mediator.Send(command);
             return RedirectToAction(nameof(Index));
         }
     }

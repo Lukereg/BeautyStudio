@@ -1,10 +1,11 @@
-﻿using BeautyStudio.Application.Models.BeautyStudio;
-using AutoMapper;
+﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BeautyStudio.Application.BeautyStudio.Queries;
+using BeautyStudio.Application.BeautyStudio.Commands.CreateBeautyStudio;
 
 namespace BeautyStudio.Application.MapProfiles
 {
@@ -12,7 +13,7 @@ namespace BeautyStudio.Application.MapProfiles
     {
         public BeautyStudioMappingProfile()
         {
-            CreateMap<AddBeautyStudioDto, Domain.Entities.BeautyStudio>();
+            CreateMap<CreateBeautyStudioDto, Domain.Entities.BeautyStudio>();
             CreateMap<Domain.Entities.BeautyStudio, GetBeuatyStudioDto>();
         }
     }

@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BeautyStudio.Application.Models.BeautyStudio
+namespace BeautyStudio.Application.BeautyStudio.Queries
 {
-    public class AddBeautyStudioDto
+    public class GetBeuatyStudioDto
     {
         public string Name { get; set; } = default!;
+        public DateTime CreatedAt { get; set; }
     }
 }
