@@ -1,5 +1,6 @@
 ﻿using BeautyStudio.Domain.Interfaces;
 using BeautyStudio.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,5 +24,8 @@ namespace BeautyStudio.Infrastructure.Repositories
             await _dbContext.AddAsync(beautyStudio);
             await _dbContext.SaveChangesAsync();
         }
+
+        public async Task<Domain.Entities.BeautyStudio?> GetByName(string name)
+            => await _dbContext.BeautyStudios.FirstOrDefaultAsync(b => b.Name.ToLower() == name.ToLower());
     }
 }

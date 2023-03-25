@@ -21,6 +21,9 @@ namespace BeautyStudio.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(AddBeautyStudioDto beautyStudio)
         {
+            if (!ModelState.IsValid)
+                return View(beautyStudio);
+
             await _beautyStudioService.Create(beautyStudio);
             return RedirectToAction(nameof(Create));
         }

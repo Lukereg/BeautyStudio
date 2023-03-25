@@ -1,6 +1,9 @@
 ﻿using BeautyStudio.Application.ApplicationUser;
 using BeautyStudio.Application.MapProfiles;
 using BeautyStudio.Application.Services;
+using BeautyStudio.Application.Validators;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -18,6 +21,10 @@ namespace BeautyStudio.Application.Extensions
             services.AddScoped<IUserContext, UserContext>();
 
             services.AddAutoMapper(typeof(BeautyStudioMappingProfile));
+
+            services.AddValidatorsFromAssemblyContaining<AddBeautyStudioDtoValidator>()
+                .AddFluentValidationAutoValidation()
+                .AddFluentValidationClientsideAdapters();
         }
     }
 }
