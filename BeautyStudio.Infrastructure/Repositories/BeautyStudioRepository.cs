@@ -25,6 +25,9 @@ namespace BeautyStudio.Infrastructure.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task<IEnumerable<Domain.Entities.BeautyStudio>> GetAll()
+            => await _dbContext.BeautyStudios.ToListAsync();
+
         public async Task<Domain.Entities.BeautyStudio?> GetByName(string name)
             => await _dbContext.BeautyStudios.FirstOrDefaultAsync(b => b.Name.ToLower() == name.ToLower());
     }

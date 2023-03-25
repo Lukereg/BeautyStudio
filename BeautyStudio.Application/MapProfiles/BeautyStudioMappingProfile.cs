@@ -13,6 +13,7 @@ namespace BeautyStudio.Application.MapProfiles
         public BeautyStudioMappingProfile()
         {
             CreateMap<AddBeautyStudioDto, Domain.Entities.BeautyStudio>();
+            CreateMap<Domain.Entities.BeautyStudio, GetBeuatyStudioDto>();
         }
     }
 }

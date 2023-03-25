@@ -5,5 +5,6 @@ namespace BeautyStudio.Application.Services
     public interface IBeautyStudioService
     {
         Task Create(AddBeautyStudioDto beautyStudioDto);
+        Task<IEnumerable<GetBeuatyStudioDto>> GetAll();
     }
 }

@@ -13,6 +13,12 @@ namespace BeautyStudio.MVC.Controllers
             _beautyStudioService = beautyStudioService;
         }
 
+        public async Task<IActionResult> Index()
+        {
+            var beautyStudios = await _beautyStudioService.GetAll();
+            return View(beautyStudios);
+        }
+
         public IActionResult Create()
         {
             return View();
@@ -25,7 +31,7 @@ namespace BeautyStudio.MVC.Controllers
                 return View(beautyStudio);
 
             await _beautyStudioService.Create(beautyStudio);
-            return RedirectToAction(nameof(Create));
+            return RedirectToAction(nameof(Index));
         }
     }
 }

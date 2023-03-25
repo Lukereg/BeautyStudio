@@ -10,5 +10,6 @@ namespace BeautyStudio.Domain.Interfaces
     {
         Task Create(Domain.Entities.BeautyStudio beautyStudio);
         Task <Domain.Entities.BeautyStudio?> GetByName(string name);
+        Task<IEnumerable<Domain.Entities.BeautyStudio>> GetAll();
     }
 }

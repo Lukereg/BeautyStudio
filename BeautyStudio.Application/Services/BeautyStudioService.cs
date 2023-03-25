@@ -32,5 +32,13 @@ namespace BeautyStudio.Application.Services
 
             await _beautyStudioRepository.Create(beautyStudio);
         }
+
+        public async Task<IEnumerable<GetBeuatyStudioDto>> GetAll()
+        {
+            var beautyStudios = await _beautyStudioRepository.GetAll();
+            var result = _mapper.Map<IEnumerable<GetBeuatyStudioDto>>(beautyStudios);
+
+            return result;
+        }
     }
 }
